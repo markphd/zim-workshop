@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>ZIM Frame - Full Template</title>
+
+<!-- Welcome to ZIM at http://zimjs.com - Code Interactive Media Pizzazz! 				-->
+<!-- ZIM runs on the HTML Canvas powered by JavaScript and CreateJS http://createjs.com -->
+<!-- Founded by Inventor Dan Zen - http://danzen.com - Canadian New Media Award Winner 	-->
+<!-- ZIM is free to use. You can donate to help improve ZIM at http://zimjs.com/donate 	-->
+
+<!-- as of ZIM 4.3.0 load createjs namespace first -->
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+<script>var zon = true; // true for comments from zim code</script>
+<script src="https://d309knd7es5f10.cloudfront.net/zim_4.7.3.js"></script><!-- add _doc to see code -->
+<!-- use zimjs.com/code/distill for minified individual functions! -->
+
+<script>
+
+// SCALING OPTIONS
+// scaling can have values as follows with full being the default
+// "fit"		sets canvas and stage to dimensions and scales to fit inside window size
+// "outside"	sets canvas and stage to dimensions and scales to fit outside window size
+// "full"		sets stage to window size with no scaling
+// "tagID"		add canvas to HTML tag of ID - set to dimensions if provided - no scaling
+
+var scaling = "full"; // makes stage the window size but does not scale content
+var width = null;
+var height = null;
+var color = "#ebcb35";
+var frame = new zim.Frame(scaling, width, height, color); // see docs for more options and info
+frame.on("ready", function() {
+	zog("ready from ZIM Frame");
+
+	var stage = frame.stage;
+	var stageW = frame.width;
+	var stageH = frame.height;
+
+	// put your code here (you can delete this code)
+
+	// 1. Create Circle
+	var circle = new zim.Circle(100, '#111');
+	// puts circle in center of stage
+	// circle.center(stage);
+
+	// add circle in stage
+	// defaults to top left corner (x=0, y=0)
+	stage.addChild(circle);
+	
+	// position circle in their x and y coordinates
+	circle.x = 100;
+	circle.y = 100;
+	// show bounding box around circle and show registration point
+	// circle.outline();
+
+
+	// 2. Create Rectangle
+	var rect = new zim.Rectangle(200, 200, "blue");
+	// change shape registration points
+	// rect.regX = 100;
+	// rect.regY = 100;
+	// rect.regX = rect.height/2;
+	// rect.regY = rect.width/2;
+
+	rect.centerReg(stage);
+	// rect.outline();
+	// make shape bigger using scale
+	// rect.scale(2);
+
+	// rotate shape
+	// rect.rotation = 20;
+
+	// animate shape
+	rect.animate({obj:{rotation:360}, time:2000, ease:"backIn", loop:true});
+
+	
+	// 3. Create Triangle
+	var tri = new zim.Triangle(150, 150, 150, "#fff");
+	stage.addChild(tri);
+	tri.x = 800;
+	tri.y = 500;
+	// tri.centerReg(stage);
+
+	// point triangle to right
+	tri.rotation = 90;
+
+	// UPDATE STAGE TO APPLY CHANGES
+	stage.update()
+	// put resizing code in here
+	// resize also gets called initially
+	// frame.on("resize", resize);
+	// function resize(e) {
+	// 	stageW = frame.width;
+	// 	stageH = frame.height;
+	// 	// can redraw things at different sizes or use scaling here
+	// 	// rect.scaleTo(stage, 20); // also see zim.Layout() for more complex scaling
+	// 	rect.center(stage); // this adds to stage as well otherwise stage.addChild(button);
+	// 	stage.update();
+	// }
+
+}); // end of ready
+</script>
+</head>
+
+<body>
+<!-- canvas with id="myCanvas" is made by zim Frame -->
+<h1>
+	Hello world!
+</h1>
+</body>
+</html>

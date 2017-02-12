@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>ZIM Frame - Assets Template</title>
+
+<!-- for CreateJS and ZIMjs http://zimjs.com - free to modify - Dan Zen 2016 -->
+<!-- see http://zimjs.com/code/frame.html for more templates and meta tags -->
+
+<!-- as of ZIM 4.3.0 load createjs namespace first -->
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+<script>var zon = true; // true for comments from zim code</script>
+<script src="https://d309knd7es5f10.cloudfront.net/zim_4.7.3.js"></script><!-- add _doc to see code -->
+<!-- use zimjs.com/code/distill for minified individual functions! -->
+
+<script>
+
+// SCALING OPTIONS
+// scaling can have values as follows with full being the default
+// "fit"		sets canvas and stage to dimensions and scales to fit inside window size
+// "outside"	sets canvas and stage to dimensions and scales to fit outside window size
+// "full"		sets stage to window size with no scaling
+// "tagID"		add canvas to HTML tag of ID - set to dimensions if provided - no scaling
+
+var scaling = "full"; // makes stage the window size but does not scale content
+var frame = new zim.Frame(scaling, null, null, "#ddd"); // see docs for more options and info
+frame.on("ready", function() {
+	zog("ready from ZIM Frame");
+
+	var stage = frame.stage;
+	var stageW = frame.width;
+	var stageH = frame.height;
+
+	// ASSET LOADING
+	// ZIM Frame wraps the CreateJS PreloadJS classes
+	// to handle basic image and sound loading
+
+	// NOTE - loading assets into a local file causes security issues in Chrome
+	// this problem does not occur once the files are on a server
+	// and Firefox and Edge do not have an issue
+	// To test locally, find your Chrome icon or shortcut, right click and choose properties
+	// then under Target, adjust your target to include --allow-file-access-from-files
+	// eg. "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files
+	// once again, there is no problem for end users when the files are on a server
+
+	// LOADING IMAGES AND SOUND
+	// provide a list of images or sounds, optional directory path, optional XHR (default false)
+	// can use relative path or just put the path on the asset
+	// and if you have onlu one asset, no need for a list:
+	// frame.loadAssets("content/logo.png");
+	frame.loadAssets(["logo.png", "welcome.mp3"], "content/");
+
+	// if you want to create a preloader use the progress event
+	// frame.on("progress", function(e){zog(e.loaded);}) // from 0-1 representing percent loaded;
+
+	// if you want to do something for each asset that is loaded use the assetLoad event
+	// frame.on("assetLoad", function(e){zog(e.asset);}) // gives access to asset;
+
+	// when the assets are loaded the complete event fires
+	frame.on("complete", function() {
+
+		var logo = frame.asset("logo.png"); // access asset (zim.Bitmap)
+		logo.cursor = "pointer"; // or any CSS cursor
+		logo.on("click", function() { // on() is like addEventListener()
+			zgo("http://zimjs.com/code/frame.html"); // or relative URL, target is available too
+		});
+
+		// play sound which returns a createjs.Sound.play() sound instance object
+		var welcome = frame.asset("welcome.mp3").play();
+		// welcome.volume = .2; // etc.
+
+		// put resizing code in here
+		frame.on("resize", resize);
+		function resize(e) {
+			stageW = frame.width;
+			stageH = frame.height;
+			logo.center(stage);
+			stage.update();
+		}
+		// resize does get called initially when the frame is ready
+		// but this is before the content is loaded so call it manually
+		resize();
+
+	}); // end of assets loading (take out if no assets)
+}); // end of ready
+</script>
+</head>
+
+<body>
+<!-- canvas with id="myCanvas" is made by zim Frame -->
+</body>
+</html>
