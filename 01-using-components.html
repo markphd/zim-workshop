@@ -38,51 +38,24 @@ frame.on("ready", function() {
 
 	// put your code here (you can delete this code)
 
-	// 1. Create Circle
-	var circle = new zim.Circle(100, '#111');
-	// puts circle in center of stage
-	// circle.center(stage);
+	// CREATE COMPONENT
+	// var component = new zim.Button();
+	// var component = new zim.CheckBox();
+	// var component = new zim.RadioButtons();
+	// var component = new zim.Pane();
+	// var component = new zim.Window();
+	var component = new zim.Waiter(stage);
+	// var component = new zim.Indicator();
+	// var component = new zim.Stepper();
+	// var component = new zim.Slider();
+	// var component = new zim.Dial();
+	// var component = new zim.Tabs();
+	// var component = new zim.Pad();
+	// var component = new zim.ColorPicker();
 
-	// add circle in stage
-	// defaults to top left corner (x=0, y=0)
-	stage.addChild(circle);
-	
-	// position circle in their x and y coordinates
-	circle.x = 100;
-	circle.y = 100;
-	// show bounding box around circle and show registration point
-	// circle.outline();
+	// component.center(stage);
 
-
-	// 2. Create Rectangle
-	var rect = new zim.Rectangle(200, 200, "blue");
-	// change shape registration points
-	// rect.regX = 100;
-	// rect.regY = 100;
-	// rect.regX = rect.height/2;
-	// rect.regY = rect.width/2;
-
-	rect.centerReg(stage);
-	// rect.outline();
-	// make shape bigger using scale
-	// rect.scale(2);
-
-	// rotate shape
-	// rect.rotation = 20;
-
-	// animate shape
-	rect.animate({obj:{rotation:360}, time:2000, ease:"backIn", loop:true});
-
-	
-	// 3. Create Triangle
-	var tri = new zim.Triangle(150, 150, 150, "#fff");
-	stage.addChild(tri);
-	tri.x = 800;
-	tri.y = 500;
-	// tri.centerReg(stage);
-
-	// point triangle to right
-	tri.rotation = 90;
+	component.show();
 
 	// UPDATE STAGE TO APPLY CHANGES
 	stage.update()
