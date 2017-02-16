@@ -37,7 +37,13 @@ frame.on("ready", function() {
 	var stageH = frame.height;
 
 	// put your code here (you can delete this code)
+	var r = 100;
+	var circle = new zim.Circle(100, frame.green);
+	var rect = new createjs.Rectangle(r, r, stageW-r*2, stageH-r*2);
+	circle.center(stage);
+	circle.drag({slide: true, rect: rect, onTop: true, slide: true });
 
+	stage.update();
 	
 }); // end of ready
 </script>
