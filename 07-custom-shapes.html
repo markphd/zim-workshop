@@ -37,7 +37,16 @@ frame.on("ready", function() {
 	var stageH = frame.height;
 
 	// put your code here (you can delete this code)
+	var w = 300;
+	var h = 200;
+	var shape = new zim.Shape(w, h);
+	var g = shape.graphics;
+	g.beginFill("hotpink").drawRect(0, 0, w, h);
+	// shape.setBounds(0, 0, 300, 200);
+	shape.center(stage);
 
+	stage.update();
+	
 }); // end of ready
 </script>
 </head>
