@@ -46,19 +46,30 @@ frame.on("ready", function() {
 	rect.y = 200;
 	
 	var triangle = new zim.Triangle(200, 200, 200, "#3ad");
-	triangle.x = 800;
-	triangle.y = 800;
+	triangle.x = 1050;
+	triangle.y = 300;
 
 	stage.addChild(rect, triangle);
+	// triangle.outline();
 
 	circle.on("mouseover", animate);
+	// circle.off("click", animate);
+
 	rect.on("mouseover", animate);
-	triangle.on("mouseover", animate, null, true);
+	// rect.off("click", animate);
+
+	triangle.on("mouseover", animate);
+	// triangle.off("click", animate);
 
 	function animate(e) {
-		this.animate({obj:{scale: 0.8}, time:200, rewind: true});
-		zog("fired!");
-		e.stopPropagation();
+		e.target.animate({obj:{scale: 0.8}, time:200, rewind: true});
+		// var mouseoutEvent = this.on("mouseout", function() {
+		// 	this.color = "#ccc";
+		// 	stage.update();
+		// 	circle.off("mouseout". mouseoutEvent);
+		// })
+		stage.update();
+		
 	}
 	
 	stage.update();
