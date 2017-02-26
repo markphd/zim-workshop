@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>ZIM Frame - Full Template</title>
+
+<!-- Welcome to ZIM at http://zimjs.com - Code Interactive Media Pizzazz! 				-->
+<!-- ZIM runs on the HTML Canvas powered by JavaScript and CreateJS http://createjs.com -->
+<!-- Founded by Inventor Dan Zen - http://danzen.com - Canadian New Media Award Winner 	-->
+<!-- ZIM is free to use. You can donate to help improve ZIM at http://zimjs.com/donate 	-->
+
+<!-- as of ZIM 4.3.0 load createjs namespace first -->
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+<script>var zon = true; // true for comments from zim code</script>
+<script src="https://d309knd7es5f10.cloudfront.net/zim_4.7.3.js"></script><!-- add _doc to see code -->
+<!-- use zimjs.com/code/distill for minified individual functions! -->
+
+<script>
+
+// SCALING OPTIONS
+// scaling can have values as follows with full being the default
+// "fit"		sets canvas and stage to dimensions and scales to fit inside window size
+// "outside"	sets canvas and stage to dimensions and scales to fit outside window size
+// "full"		sets stage to window size with no scaling
+// "tagID"		add canvas to HTML tag of ID - set to dimensions if provided - no scaling
+
+var scaling = "full"; // makes stage the window size but does not scale content
+var width = null;
+var height = null;
+var color = "#ebcb35";
+var frame = new zim.Frame(scaling, width, height, color); // see docs for more options and info
+frame.on("ready", function() {
+	zog("ready from ZIM Frame");
+
+	var stage = frame.stage;
+	var stageW = frame.width;
+	var stageH = frame.height;
+
+	// put your code here (you can delete this code)
+	var droids = new zim.Container();
+	stage.addChild(droids);
+	droids.cursor = "pointer";
+
+	droids.on("click", function(e) {
+		// droids.removeChild(e.target);
+		e.target.parent.removeChild(e.target);
+		stage.update();
+	})
+
+	droids.drag();
+
+	zim.loop(170, function() {
+		var color = "#"+(Math.random()*0xFFFFFF<<0).toString(16);
+		var droid = new zim.Triangle(zim.rand(60, 120), null, null, color);
+		droid.x = zim.rand(droid.width/2, stageW - droid.width/2)
+		droid.y = zim.rand(droid.height/2, stageH - droid.height/2);
+		
+		var visor = new zim.Circle(5, 5);
+		visor.center(droid);
+		droids.addChild(droid);
+	})
+
+
+}); // end of ready
+</script>
+</head>
+
+<body>
+<!-- canvas with id="myCanvas" is made by zim Frame -->
+</body>
+</html>
